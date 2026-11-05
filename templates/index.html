@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دستیار صوتی کتابخانه دانشگاه</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="background-art">
+        <div class="color-shape shape-one"></div>
+        <div class="color-shape shape-two"></div>
+        <div class="color-shape shape-three"></div>
+        <div class="color-shape shape-four"></div>
+        <div class="color-shape shape-five"></div>
+    </div>
+
+    <header>
+        <div class="logo">
+            <svg viewBox="0 0 64 64" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M32 19C24 12 13 13 6 17V49C15 45 24 46 32 53V19Z"
+                      fill="#DCC7FF" stroke="#B58AE8" stroke-width="2.5"/>
+                <path d="M32 19C40 12 51 13 58 17V49C49 45 40 46 32 53V19Z"
+                      fill="#42D9FF" stroke="#168BFF" stroke-width="2.5"/>
+                <path d="M32 19V53" stroke="#FFFFFF" stroke-width="2.5"/>
+                <path d="M13 25C18 23 23 24 27 27"
+                      stroke="#7041B8" stroke-width="2" stroke-linecap="round"/>
+                <path d="M51 25C46 23 41 24 37 27"
+                      stroke="#168BFF" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <div>
+            <h2>کتابخانه دیجیتال دانشگاه</h2>
+            <span>همراه هوشمند جستجوی کتاب</span>
+        </div>
+    </header>
+    <main>
+        <section class="welcome">
+            <span class="tag">✦ دنیایی از دانش، فقط با یک جستجو</span>
+
+            <h1>کتاب مورد نظرت رو <span>پیدا کن!</span></h1>
+
+            <p>
+                با دستیار هوشمند کتابخانه، فقط کافیه نام کتاب،
+                نویسنده یا موضوع مورد نظرت رو جستجو کنی.
+            </p>
+        </section>
+
+        <section class="search-card">
+            <h3>چطور می‌تونم کمکت کنم؟</h3>
+
+            <div class="language">
+                <button class="active">فارسی</button>
+                <button>English</button>
+            </div>
+
+         <div class="search-box">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="نام کتاب، نویسنده یا موضوع را وارد کن..."
+    >
+    <button class="search-button" type="button">جستجو</button>
+</div>
+            <div class="voice-section">
+    <button class="mic-circle" id="micButton" type="button">
+        <span>🎙️</span>
+    </button>
+
+    <p id="voiceMessage">یا برای جستجوی صوتی صحبت کن</p>
+    <small>جستجو به زبان فارسی و انگلیسی</small>
+</div>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <span>📖</span>
+                <h4>جستجوی کتاب</h4>
+                <p>بر اساس عنوان کتاب</p>
+            </div>
+
+            <div class="feature">
+                <span>✍️</span>
+                <h4>جستجوی نویسنده</h4>
+                <p>پیدا کردن آثار نویسندگان</p>
+            </div>
+
+            <div class="feature">
+                <span>🔍</span>
+                <h4>جستجوی موضوعی</h4>
+                <p>کشف کتاب‌های مرتبط</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        طراحی دستیار صوتی جستجوی کتاب در کتابخانه دیجیتال دانشگاه
+    </footer>
+    <script>
+    const micButton = document.getElementById("micButton");
+    const searchInput = document.getElementById("searchInput");
+    const voiceMessage = document.getElementById("voiceMessage");
+
+    let selectedLanguage = "fa-IR";
+
+    // انتخاب زبان گفتار
+    const languageButtons = document.querySelectorAll(".language button");
+
+    languageButtons[0].addEventListener("click", function () {
+        selectedLanguage = "fa-IR";
+        languageButtons[0].classList.add("active");
+        languageButtons[1].classList.remove("active");
+    });
+
+    languageButtons[1].addEventListener("click", function () {
+        selectedLanguage = "en-US";
+        languageButtons[1].classList.add("active");
+        languageButtons[0].classList.remove("active");
+    });
+
+    // بررسی پشتیبانی مرورگر از تشخیص گفتار
+    const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+        const recognition = new SpeechRecognition();
+
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        micButton.addEventListener("click", function () {
+            recognition.lang = selectedLanguage;
+            recognition.start();
+
+            voiceMessage.textContent = "در حال گوش دادن به صدای شما...";
+        });
+
+        recognition.onresult = function (event) {
+            const spokenText = event.results[0][0].transcript;
+
+            // نوشتن متن تشخیص داده شده در کادر جستجو
+            searchInput.value = spokenText;
+
+            voiceMessage.textContent = "صدای شما با موفقیت به متن تبدیل شد.";
+        };
+
+        recognition.onerror = function () {
+            voiceMessage.textContent =
+                "تشخیص صدا انجام نشد. دوباره تلاش کنید.";
+        };
+
+        recognition.onend = function () {
+            // پایان گوش دادن
+        };
+
+    } else {
+        micButton.disabled = true;
+        voiceMessage.textContent =
+            "مرورگر شما از تشخیص گفتار پشتیبانی نمی‌کند.";
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,361 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  
+    font-family: 'Vazirmatn', sans-serif;
+    min-height: 100vh;
+    color: #ffffff;
+    background: #130b27;
+    overflow-x: hidden;
+    position: relative;
+    isolation: isolate;
+}
+
+.background-glow {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+    z-index: -1;
+}
+
+.glow-one {
+    background: #9747ff;
+    top: 100px;
+    right: -100px;
+}
+
+.glow-two {
+    background: #168bff;
+    bottom: 50px;
+    left: -100px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 25px 8%;
+}
+
+.logo {
+    font-size: 35px;
+    background: #7041b8;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+header h2 {
+    font-size: 18px;
+}
+
+header span {
+    color: #bda4e9;
+    font-size: 12px;
+}
+
+main {
+    width: 90%;
+    max-width: 1050px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.tag {
+    color: #42d9ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.welcome h1 {
+    font-size: 43px;
+    margin: 20px 0;
+}
+
+.welcome h1 span {
+    color: #b58ae8;
+}
+
+.welcome p {
+    color: #c8bddc;
+    line-height: 2;
+    font-size: 14px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.search-card {
+    margin: 45px auto;
+    max-width: 750px;
+    padding: 35px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(181,138,232,0.35);
+    border-radius: 25px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 35px rgba(112,65,184,0.15);
+}
+
+.search-card h3 {
+    margin-bottom: 20px;
+}
+
+.language {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.language button {
+    padding: 9px 25px;
+    border: 1px solid #7041b8;
+    border-radius: 20px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.language button.active {
+    background: #7041b8;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    min-width: 0;
+    padding: 17px;
+    border: 1px solid #7041b8;
+    border-radius: 12px;
+    outline: none;
+    background: rgba(10,5,25,0.65);
+    color: white;
+    font-family: inherit;
+}
+
+.search-box input::placeholder {
+    color: #a99abf;
+}
+
+.search-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #7041b8, #168bff);
+    color: white;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.voice-section {
+    margin-top: 35px;
+}
+
+.mic-circle {
+    width: 85px;
+    height: 85px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7041b8, #168bff);
+    box-shadow: 0 0 20px #168bff,
+                0 0 45px rgba(22,139,255,0.4);
+    font-size: 32px;
+}
+
+.voice-section p {
+    margin-top: 18px;
+    font-size: 14px;
+}
+
+.voice-section small {
+    color: #bda4e9;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 50px 0;
+}
+
+.feature {
+    padding: 25px 15px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(181,138,232,0.2);
+}
+
+.feature span {
+    font-size: 30px;
+}
+
+.feature h4 {
+    margin: 12px 0;
+}
+
+.feature p {
+    color: #bda4e9;
+    font-size: 12px;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #a99abf;
+    font-size: 11px;
+}
+
+@media (max-width: 600px) {
+    .welcome h1 {
+        font-size: 30px;
+    }
+
+    .search-card {
+        padding: 20px;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+/* Animated segmented background */
+
+.background-art {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.color-shape {
+    position: absolute;
+    border-radius: 45%;
+    filter: blur(2px);
+    opacity: 0.35;
+    animation: floatShape 16s ease-in-out infinite alternate;
+}
+
+.shape-one {
+    width: 480px;
+    height: 480px;
+    background: linear-gradient(135deg, #7041B8, #B58AE8);
+    top: -180px;
+    right: -100px;
+}
+
+.shape-two {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(145deg, #168BFF, #42D9FF);
+    bottom: -160px;
+    left: -100px;
+    animation-delay: -4s;
+}
+
+.shape-three {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, #9B5DE5, #DCC7FF);
+    top: 38%;
+    left: 30%;
+    opacity: 0.16;
+    animation-delay: -7s;
+}
+
+.shape-four {
+    width: 240px;
+    height: 240px;
+    background: linear-gradient(135deg, #54278F, #168BFF);
+    top: 12%;
+    left: -90px;
+    animation-delay: -10s;
+}
+
+.shape-five {
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(135deg, #B58AE8, #7041B8);
+    bottom: 5%;
+    right: -150px;
+    opacity: 0.2;
+    animation-delay: -6s;
+}
+
+@keyframes floatShape {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: translate(45px, -35px) rotate(12deg) scale(1.12);
+    }
+
+    100% {
+        transform: translate(-30px, 40px) rotate(-10deg) scale(0.95);
+    }
+}
+
+/* Improved book logo */
+
+.logo {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #7041B8, #211044);
+    border: 1px solid rgba(220,199,255,0.45);
+    box-shadow: 0 0 20px rgba(112,65,184,0.45),
+                0 0 25px rgba(22,139,255,0.2);
+}
+
+.logo svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Improved welcome label */
+
+.tag {
+    display: inline-block;
+    color: #42D9FF;
+    font-size: 13px;
+    letter-spacing: 0;
+    padding: 10px 20px;
+    border: 1px solid rgba(66,217,255,0.3);
+    border-radius: 30px;
+    background: rgba(22,139,255,0.08);
+    box-shadow: 0 0 18px rgba(22,139,255,0.12);
+}
+
+/* Keep page content above background */
+
+header,
+main,
+footer {
+    position: relative;
+    z-index: 1;
+}
