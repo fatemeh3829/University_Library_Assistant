@@ -64,7 +64,8 @@
         id="searchInput"
         placeholder="نام کتاب، نویسنده یا موضوع را وارد کن..."
     >
-    <button class="search-button" type="button">جستجو</button>
+    <div id="resultsSection"></div>
+<button id="searchButton" class="search-button" type="button">جستجو</button>
 </div>
             <div class="voice-section">
     <button class="mic-circle" id="micButton" type="button">
@@ -104,6 +105,8 @@
     const micButton = document.getElementById("micButton");
     const searchInput = document.getElementById("searchInput");
     const voiceMessage = document.getElementById("voiceMessage");
+    const searchButton = document.getElementById("searchButton");
+    const resultsSection = document.getElementById("resultsSection");
 
     let selectedLanguage = "fa-IR";
 
@@ -144,6 +147,7 @@
 
             // نوشتن متن تشخیص داده شده در کادر جستجو
             searchInput.value = spokenText;
+            searchButton.click();
 
             voiceMessage.textContent = "صدای شما با موفقیت به متن تبدیل شد.";
         };
@@ -162,6 +166,48 @@
         voiceMessage.textContent =
             "مرورگر شما از تشخیص گفتار پشتیبانی نمی‌کند.";
     }
+    // جستجوی کتاب در پایگاه داده
+searchButton.addEventListener("click", async function () {
+    const keyword = searchInput.value.trim();
+
+    if (!keyword) {
+        resultsSection.innerHTML = "<p>لطفاً نام کتاب یا نویسنده را وارد کنید.</p>";
+        return;
+    }
+
+    resultsSection.innerHTML = "<p>در حال جستجوی کتاب...</p>";
+
+    try {
+        const response = await fetch("/search", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ keyword: keyword })
+        });
+
+        const books = await response.json();
+
+        if (books.length === 0) {
+            resultsSection.innerHTML = "<p>کتابی با این مشخصات پیدا نشد.</p>";
+            return;
+        }
+
+        resultsSection.innerHTML = books.map(book => `
+            <div class="book-result">
+                <h3>${book.title}</h3>
+                <p>نویسنده: ${book.author || "نامشخص"}</p>
+                <p>ناشر: ${book.publisher || "نامشخص"}</p>
+                <p>سال انتشار: ${book.publish_year || "نامشخص"}</p>
+                <p>موضوع: ${book.subject || "نامشخص"}</p>
+            </div>
+        `).join("");
+
+    } catch (error) {
+        resultsSection.innerHTML = "<p>خطا در جستجو. دوباره تلاش کنید.</p>";
+        console.error(error);
+    }
+});
 </script>
 
 </body>
