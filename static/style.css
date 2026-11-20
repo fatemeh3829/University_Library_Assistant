@@ -426,3 +426,422 @@ footer {
     line-height: 2;
     margin-bottom: 15px;
 }
+/* Simorgh animated background */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+        linear-gradient(rgba(13, 7, 32, 0.28), rgba(13, 7, 32, 0.48)),
+        url("/static/simorgh-home.png") center center / cover no-repeat;
+    animation: simorghGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes simorghGlow {
+    from {
+        filter: brightness(0.88) saturate(1);
+    }
+    to {
+        filter: brightness(1.08) saturate(1.15);
+    }
+}
+
+
+/* Magical Simorgh Glass Design */
+
+.search-card {
+    background: linear-gradient(
+        145deg,
+        rgba(35, 18, 68, 0.78),
+        rgba(12, 30, 65, 0.72)
+    );
+    border: 1px solid rgba(181, 138, 232, 0.55);
+    border-radius: 28px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+        0 0 25px rgba(112, 65, 184, 0.25),
+        0 0 45px rgba(22, 139, 255, 0.12),
+        inset 0 0 25px rgba(181, 138, 232, 0.06);
+}
+
+.feature,
+.book-result {
+    background: linear-gradient(
+        145deg,
+        rgba(39, 20, 75, 0.78),
+        rgba(13, 35, 70, 0.76)
+    );
+    border: 1px solid rgba(160, 125, 225, 0.38);
+    border-radius: 22px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow:
+        0 8px 28px rgba(5, 3, 20, 0.25),
+        inset 0 0 18px rgba(130, 100, 220, 0.06);
+    transition: all 0.35s ease;
+}
+
+.feature:hover,
+.book-result:hover {
+    transform: translateY(-5px);
+    border-color: rgba(66, 217, 255, 0.75);
+    box-shadow:
+        0 0 22px rgba(22, 139, 255, 0.22),
+        0 0 30px rgba(151, 71, 255, 0.2);
+}
+
+.search-box input {
+    background: rgba(12, 8, 32, 0.72);
+    border: 1px solid rgba(181, 138, 232, 0.55);
+    border-radius: 15px;
+    box-shadow: inset 0 0 12px rgba(112, 65, 184, 0.12);
+}
+
+.search-box input:focus {
+    border-color: #42d9ff;
+    box-shadow: 0 0 15px rgba(66, 217, 255, 0.2);
+}
+
+.search-button,
+.language button.active {
+    background: linear-gradient(135deg, #7041b8, #168bff);
+    box-shadow: 0 0 18px rgba(112, 65, 184, 0.3);
+}
+
+.search-button:hover,
+.language button:hover {
+    box-shadow: 0 0 22px rgba(66, 217, 255, 0.35);
+    border-color: #42d9ff;
+}
+
+.mic-circle {
+    border: 1px solid rgba(220, 199, 255, 0.55);
+    box-shadow:
+        0 0 22px rgba(22, 139, 255, 0.55),
+        0 0 45px rgba(112, 65, 184, 0.35);
+}
+
+
+/* Refined transparent search card */
+.search-card {
+    max-width: 680px;
+    padding: 27px 30px;
+    margin: 32px auto;
+    background: linear-gradient(
+        145deg,
+        rgba(65, 43, 105, 0.48),
+        rgba(25, 49, 85, 0.45)
+    );
+    border: 1px solid rgba(205, 180, 255, 0.35);
+    border-radius: 23px;
+    box-shadow:
+        0 8px 30px rgba(5, 3, 20, 0.18),
+        inset 0 0 20px rgba(190, 160, 255, 0.05);
+}
+
+/* Fancy animated microphone */
+.mic-circle {
+    position: relative;
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #a66bff, #397dff, #7041b8);
+    border: 2px solid rgba(220, 199, 255, 0.8);
+    box-shadow:
+        0 0 15px rgba(151, 71, 255, 0.65),
+        0 0 30px rgba(22, 139, 255, 0.5),
+        inset 0 0 15px rgba(255, 255, 255, 0.2);
+    animation: micFloat 3s ease-in-out infinite,
+               micGlow 2.5s ease-in-out infinite alternate;
+}
+
+.mic-circle::before {
+    content: "";
+    position: absolute;
+    inset: -9px;
+    border: 1px solid rgba(181, 138, 232, 0.65);
+    border-radius: 50%;
+    animation: micRing 2.5s ease-out infinite;
+    pointer-events: none;
+}
+
+.mic-circle::after {
+    content: "";
+    position: absolute;
+    inset: -15px;
+    border: 1px solid rgba(66, 217, 255, 0.35);
+    border-radius: 50%;
+    animation: micRing 2.5s ease-out infinite 1.2s;
+    pointer-events: none;
+}
+
+@keyframes micFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes micGlow {
+    from {
+        box-shadow: 0 0 15px rgba(151,71,255,0.5),
+                    0 0 28px rgba(22,139,255,0.35);
+    }
+    to {
+        box-shadow: 0 0 25px rgba(181,138,232,0.8),
+                    0 0 42px rgba(22,139,255,0.65);
+    }
+}
+
+@keyframes micRing {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.35);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .search-card {
+        max-width: 100%;
+        padding: 22px 17px;
+    }
+}
+
+
+/* Elegant language selector buttons */
+.language {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.language button {
+    min-width: 115px;
+    padding: 11px 24px;
+    border: 1px solid rgba(190, 160, 255, 0.42);
+    border-radius: 30px;
+    background: rgba(35, 22, 68, 0.42);
+    color: #e8dcff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 12px rgba(181, 138, 232, 0.05);
+}
+
+.language button:hover {
+    transform: translateY(-3px);
+    border-color: #42d9ff;
+    background: rgba(75, 48, 125, 0.65);
+    box-shadow:
+        0 0 14px rgba(66, 217, 255, 0.22),
+        0 0 22px rgba(151, 71, 255, 0.18);
+}
+
+.language button.active {
+    color: #ffffff;
+    background: linear-gradient(
+        120deg,
+        rgba(126, 74, 200, 0.95),
+        rgba(35, 126, 210, 0.9)
+    );
+    border-color: rgba(190, 220, 255, 0.8);
+    box-shadow:
+        0 0 16px rgba(151, 71, 255, 0.38),
+        0 0 24px rgba(22, 139, 255, 0.22);
+}
+
+.language button:active {
+    transform: scale(0.96);
+}
+
+
+/* Final language buttons redesign */
+.language button,
+.language button.active {
+    appearance: none !important;
+    min-width: 125px !important;
+    height: 46px !important;
+    padding: 10px 25px !important;
+    border-radius: 16px !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #f3eaff !important;
+    background: rgba(48, 30, 83, 0.62) !important;
+    border: 1px solid rgba(190, 160, 255, 0.5) !important;
+    box-shadow: 0 4px 15px rgba(10, 5, 30, 0.2) !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+}
+
+.language button.active {
+    background: linear-gradient(
+        120deg,
+        rgba(126, 74, 200, 0.95),
+        rgba(35, 126, 210, 0.95)
+    ) !important;
+    border: 1px solid rgba(220, 205, 255, 0.9) !important;
+    box-shadow:
+        0 0 15px rgba(151, 71, 255, 0.4),
+        0 0 25px rgba(22, 139, 255, 0.25) !important;
+}
+
+.language button:hover {
+    transform: translateY(-3px) !important;
+    border-color: #42d9ff !important;
+    box-shadow: 0 0 20px rgba(66, 217, 255, 0.35) !important;
+}
+
+.language button:active {
+    transform: scale(0.96) !important;
+}
+
+
+/* Magical book language selector */
+.book-language {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.book-language label {
+    color: #e3d4ff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#bookLanguage {
+    min-width: 190px;
+    padding: 12px 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(181, 138, 232, 0.65);
+    background: rgba(35, 20, 70, 0.82);
+    color: #ffffff;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0 0 16px rgba(112, 65, 184, 0.18);
+    transition: all 0.3s ease;
+}
+
+#bookLanguage:hover,
+#bookLanguage:focus {
+    border-color: #42d9ff;
+    box-shadow:
+        0 0 12px rgba(66, 217, 255, 0.25),
+        0 0 22px rgba(151, 71, 255, 0.2);
+}
+
+#bookLanguage option {
+    background: #21143d;
+    color: #ffffff;
+    padding: 10px;
+}
+
+
+/* Compact elegant book language selector */
+.book-language {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.book-language label {
+    font-size: 13px;
+    color: #d9c8f5;
+}
+
+#bookLanguage {
+    width: 145px;
+    min-width: 145px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(190, 160, 255, 0.45);
+    background: rgba(55, 35, 90, 0.58);
+    color: #f4edff;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(112, 65, 184, 0.16);
+    transition: all 0.25s ease;
+}
+
+#bookLanguage:hover,
+#bookLanguage:focus {
+    border-color: #42d9ff;
+    background: rgba(75, 50, 120, 0.72);
+    box-shadow: 0 0 14px rgba(66, 217, 255, 0.2);
+}
+
+#bookLanguage option {
+    background: #21143d;
+    color: white;
+}
+
+
+/* Interactive search filters */
+.feature {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.feature.active {
+    border: 1px solid rgba(66, 217, 255, 0.9);
+    background: linear-gradient(
+        145deg,
+        rgba(91, 45, 150, 0.65),
+        rgba(13, 65, 110, 0.65)
+    );
+    box-shadow:
+        0 0 18px rgba(66, 217, 255, 0.25),
+        0 0 25px rgba(151, 71, 255, 0.25);
+    transform: translateY(-4px);
+}
+
+.feature:focus-visible {
+    outline: 2px solid #42d9ff;
+    outline-offset: 4px;
+}
+
+/* Interactive search filters */
+.feature {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.feature.active {
+    border: 1px solid rgba(66, 217, 255, 0.9);
+    background: linear-gradient(
+        145deg,
+        rgba(91, 45, 150, 0.65),
+        rgba(13, 65, 110, 0.65)
+    );
+    box-shadow:
+        0 0 18px rgba(66, 217, 255, 0.25),
+        0 0 25px rgba(151, 71, 255, 0.25);
+    transform: translateY(-4px);
+}
+
+.feature:focus-visible {
+    outline: 2px solid #42d9ff;
+    outline-offset: 4px;
+}

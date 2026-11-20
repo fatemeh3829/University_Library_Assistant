@@ -8,6 +8,7 @@ def create_database():
     connection = sqlite3.connect(DATABASE_NAME)
     cursor = connection.cursor()
 
+    # ایجاد جدول کتاب‌ها
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS books (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -16,65 +17,42 @@ def create_database():
             publisher TEXT,
             publish_year INTEGER,
             subject TEXT,
-            keywords TEXT
+            keywords TEXT,
+            isbn TEXT,
+            source_url TEXT,
+            language TEXT,
+            original_book_id INTEGER,
+            edition_type TEXT
         )
     """)
 
-    sample_books = [
-        (
-            "مبانی برنامه نویسی پایتون",
-            "محمد رضایی",
-            "انتشارات دانشگاهی",
-            1402,
-            "برنامه نویسی",
-            "پایتون برنامه نویسی Python"
-        ),
-        (
-            "هوش مصنوعی",
-            "استوارت راسل",
-            "انتشارات علم",
-            1401,
-            "هوش مصنوعی",
-            "AI Artificial Intelligence یادگیری ماشین"
-        ),
-        (
-            "پایگاه داده ها",
-            "علی احمدی",
-            "انتشارات فناوری",
-            1400,
-            "پایگاه داده",
-            "SQL دیتابیس بانک اطلاعاتی"
-        ),
-        (
-            "مهندسی نرم افزار",
-            "راجر پرسمن",
-            "انتشارات دانشگاهی",
-            1399,
-            "مهندسی نرم افزار",
-            "Software Engineering طراحی نرم افزار"
-        ),
-        (
-            "شبکه های کامپیوتری",
-            "اندرو تننباوم",
-            "انتشارات فناوری",
-            1402,
-            "شبکه",
-            "شبکه کامپیوتر اینترنت"
-        )
+    # بررسی ستون‌های موجود
+    cursor.execute("PRAGMA table_info(books)")
+    existing_columns = [
+        column[1] for column in cursor.fetchall()
     ]
 
-    cursor.executemany("""
-        INSERT INTO books
-        (title, author, publisher, publish_year, subject, keywords)
-        SELECT ?, ?, ?, ?, ?, ?
-        WHERE NOT EXISTS (
-            SELECT 1 FROM books
-            WHERE title = ? AND author = ?
-        )
-    """, [
-        book + (book[0], book[1])
-        for book in sample_books
-    ])
+    # اضافه کردن ستون‌های جدید به جدول قدیمی
+    new_columns = {
+        "isbn": "TEXT",
+        "source_url": "TEXT",
+        "language": "TEXT",
+        "original_book_id": "INTEGER",
+        "edition_type": "TEXT"
+    }
+
+    for column_name, column_type in new_columns.items():
+        if column_name not in existing_columns:
+            cursor.execute(
+                f"ALTER TABLE books ADD COLUMN {column_name} {column_type}"
+            )
+
+    # جلوگیری از ثبت ISBN تکراری
+    cursor.execute("""
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_books_isbn
+        ON books(isbn)
+        WHERE isbn IS NOT NULL AND isbn != ''
+    """)
 
     connection.commit()
     connection.close()
@@ -82,4 +60,4 @@ def create_database():
 
 if __name__ == "__main__":
     create_database()
-    print("Database created successfully!")
+    print("Database updated successfully!")
